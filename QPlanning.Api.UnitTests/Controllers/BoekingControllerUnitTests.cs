@@ -287,7 +287,7 @@ namespace QPlanning.Api.Unittests.Controllers
             .Setup(med => med.Send(It.IsAny<AddBoekingCommand>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(new BoekingResponse(0, true, "OK"));
 
-          var controller = new BoekingController(mockMediator.ObjectResult);
+          var controller = new BoekingController(mockMediator.Object);
 
           var command = new AddBoekingCommand { Weeknummer = 0};
 
@@ -296,7 +296,7 @@ namespace QPlanning.Api.Unittests.Controllers
 
           // Assert
           var ObjectResult = Assert.IsAssignableFrom<ObjectResult>(result);
-          Assert.Equal((int)HttpStatusCode.OK, ObjectResult.StatusCode);
+          Assert.NotEqual((int)HttpStatusCode.OK, ObjectResult.StatusCode);
         }
 
         [Fact]
@@ -308,7 +308,7 @@ namespace QPlanning.Api.Unittests.Controllers
             .Setup(med => med.Send(It.IsAny<AddBoekingCommand>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(new BoekingResponse(0, true, "OK"));
 
-          var controller = new BoekingController(mockMediator.ObjectResult);
+          var controller = new BoekingController(mockMediator.Object);
 
           var command = new AddBoekingCommand { Weeknummer = 53};
 
@@ -317,7 +317,7 @@ namespace QPlanning.Api.Unittests.Controllers
 
           // Assert
           var ObjectResult = Assert.IsAssignableFrom<ObjectResult>(result);
-          Assert.Equal((int)HttpStatusCode.OK, ObjectResult.StatusCode);
+          Assert.NotEqual((int)HttpStatusCode.OK, ObjectResult.StatusCode);
         }
     }
 }
