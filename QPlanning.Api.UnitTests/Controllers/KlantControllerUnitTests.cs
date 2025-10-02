@@ -47,7 +47,7 @@ namespace QPlanning.Api.Unittests.Controllers
       // Arrange
       var mockMediator = new Mock<IMediator>();
       mockMediator
-        .Setup(med => med.Sent(It.IsAny<AddKlantCommand>(), It.IsAny<CancellationToken>()))
+        .Setup(med => med.Send(It.IsAny<AddKlantCommand>(), It.IsAny<CancellationToken>()))
         .ReturnsAsync(new BaseResponse("1", true, "OK"));
 
       var controller = new KlantController(mockMediator.Object);
@@ -69,12 +69,12 @@ namespace QPlanning.Api.Unittests.Controllers
       // Arrange
       var mockMediator = new Mock<IMediator>();
       mockMediator
-        .Setup(med => med.Sent(It.IsAny<AddKlantCommand>(), It.IsAny<CancellationToken>()))
+        .Setup(med => med.Send(It.IsAny<AddKlantCommand>(), It.IsAny<CancellationToken>()))
         .ReturnsAsync(new BaseResponse("1", true, "OK"));
 
       var controller = new KlantController(mockMediator.Object);
 
-      var command = new AddKlantCommand { Startdatum = System.DateTime.Today}
+      var command = new AddKlantCommand { Startdatum = System.DateTime.Today };
 
       // Act
       var result = await controller.Add(command);
@@ -85,17 +85,17 @@ namespace QPlanning.Api.Unittests.Controllers
     }
 
     [Fact]
-    public async void AddKlantCommand_ReturnsOkWhenEndDateDoesNotEqualStartDateAndIsNotBeforeStartDate();
+    public async void AddKlantCommand_ReturnsOkWhenEndDateDoesNotEqualStartDateAndIsNotBeforeStartDate()
     {
       // Arrange
       var mockMediator = new Mock<IMediator>();
       mockMediator
-        .Setup(med => med.Sent(It.IsAny<AddKlantCommand>(), It.IsAny<CancellationToken>()))
+        .Setup(med => med.Send(It.IsAny<AddKlantCommand>(), It.IsAny<CancellationToken>()))
         .ReturnsAsync(new BaseResponse("1", true, "OK"));
 
       var controller = new KlantController(mockMediator.Object);
 
-      var command = new AddKlantCommand { Startdatum = System.DateTime.Today; EindDatum = System.DateTime.Today.AddDays(1)}
+            var command = new AddKlantCommand { Startdatum = System.DateTime.Today, Einddatum = System.DateTime.Today.AddDays(1) };
 
       // Act
       var result = await controller.Add(command);
@@ -111,7 +111,7 @@ namespace QPlanning.Api.Unittests.Controllers
       // Arrange
       var mockMediator = new Mock<IMediator>();
       mockMediator
-        .Setup(med => med.Sent(It.IsAny<AddKlantCommand>(), It.IsAny<CancellationToken>()))
+        .Setup(med => med.Send(It.IsAny<AddKlantCommand>(), It.IsAny<CancellationToken>()))
         .ReturnsAsync(new BaseResponse("1", true, "OK"));
 
       var controller = new KlantController(mockMediator.Object);
@@ -132,7 +132,7 @@ namespace QPlanning.Api.Unittests.Controllers
       // Arrange
       var mockMediator = new Mock<IMediator>();
       mockMediator
-        .Setup(med => med.Sent(It.IsAny<AddKlantCommand>(), It.IsAny<CancellationToken>()))
+        .Setup(med => med.Send(It.IsAny<AddKlantCommand>(), It.IsAny<CancellationToken>()))
         .ReturnsAsync(new BaseResponse("1", true, "OK"));
 
       var controller = new KlantController(mockMediator.Object);
@@ -143,7 +143,7 @@ namespace QPlanning.Api.Unittests.Controllers
       var result = await controller.Add(command);
 
       var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
-      Assert.NotEqual((int)HttpStatusCode.OK, objectResult);
+      Assert.NotEqual((int)HttpStatusCode.OK, objectResult.StatusCode);
     }
   }
 }
