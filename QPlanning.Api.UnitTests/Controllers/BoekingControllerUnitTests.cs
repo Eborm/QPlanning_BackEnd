@@ -252,7 +252,71 @@ namespace QPlanning.Api.Unittests.Controllers
           // Act
           var result = await controller.Add(command);
 
-          var ObjectResult = Assert.IsAssignableFrom<objectResult>(result);
+          // Assert
+          var ObjectResult = Assert.IsAssignableFrom<ObjectResult>(result);
+          Assert.Equal((int)HttpStatusCode.OK, ObjectResult.StatusCode);
+        }
+
+        [Fact]
+        public async void AddBoekingCommand_ReturnsOkWhenBoekingWeekIsLeseThan53()
+        {
+          // Arrange
+          var mockMediator = new Mock<IMediator>();
+          mockMediator
+            .Setup(med => med.Send(It.IsAny<AddBoekingCommand>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new BoekingResponse(0, true, "OK"));
+
+          var controller = new BoekingController(mockMediator.Object);
+
+          var command =  new AddBoekingCommand { Weeknummer = 52};
+
+          // Act
+          var result = await controller.Add(command);
+
+          // Assert
+          var ObjectResult = Assert.IsAssignableFrom<ObjectResult>(result);
+          Assert.Equal((int)HttpStatusCode.OK, ObjectResult.StatusCode);
+        }
+
+        [Fact]
+        public async void AddBoekingCommand_ReturnsErrorWhenBoekingWeekIsLessThan1()
+        {
+          // Arrange
+          var mockMediator = new Mock<IMediator>();
+          mockMediator
+            .Setup(med => med.Send(It.IsAny<AddBoekingCommand>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new BoekingResponse(0, true, "OK"));
+
+          var controller = new BoekingController(mockMediator.ObjectResult);
+
+          var command = new AddBoekingCommand { Weeknummer = 0};
+
+          // Act
+          var result = await controller.Add(command);
+
+          // Assert
+          var ObjectResult = Assert.IsAssignableFrom<ObjectResult>(result);
+          Assert.Equal((int)HttpStatusCode.OK, ObjectResult.StatusCode);
+        }
+
+        [Fact]
+        public async void AddBoekingCommand_ReturnsErrorWhenBoekingWeekIsMoreThan52()
+        {
+          // Arrange
+          var mockMediator = new Mock<IMediator>();
+          mockMediator
+            .Setup(med => med.Send(It.IsAny<AddBoekingCommand>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new BoekingResponse(0, true, "OK"));
+
+          var controller = new BoekingController(mockMediator.ObjectResult);
+
+          var command = new AddBoekingCommand { Weeknummer = 53};
+
+          // Act
+          var result = await controller.Add(command);
+
+          // Assert
+          var ObjectResult = Assert.IsAssignableFrom<ObjectResult>(result);
           Assert.Equal((int)HttpStatusCode.OK, ObjectResult.StatusCode);
         }
     }
