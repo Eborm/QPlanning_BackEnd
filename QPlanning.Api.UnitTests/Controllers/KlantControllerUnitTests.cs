@@ -12,6 +12,8 @@ using QPlanning.Business.UseCases.Boeking.Add.Dto;
 using QPlanning.Business.UseCases.Boeking.Get.Models;
 using QPlanning.Business.UseCases.Boeking.Dto;
 using Microsoft.VisualBasic.FileIO;
+using QPlanning.Business.UseCases.Klanten.Add.Dto.Commands;
+using QPlanning.Business.UseCases.Klanten.Get.Dto.Responses;
 
 namespace QPlanning.Api.Unittests.Controllers
 {
@@ -24,19 +26,19 @@ namespace QPlanning.Api.Unittests.Controllers
       // Arrange
       var mockMediator = new Mock<IMediator>();
       mockMediator
-        .Setup(med => med.Send(It.IsAny<AddKlantenCommand>(), It.IsAny<CancellationToken>()))
-        .ReturnsAsync(new KlantResponse(0, true, "OK"));
+        .Setup(med => med.Send(It.IsAny<AddKlantCommand>(), It.IsAny<CancellationToken>()))
+        .ReturnsAsync(new BaseResponse("1", true, "OK"));
 
       var controller = new KlantController(mockMediator.Object);
 
-      var command = new AddKlantenCommand { Budget = 1};
+      var command = new AddKlantCommand { Budget = 1};
 
       // Act
       var result = await controller.Add(command);
 
       // Assert
-      var objectResult = Assert.IsAssignableForm<ObjectResult>(result);
-      Assert.Eqaul((int)HttpStatusCode.OK, objectResult.StatusCode);
+      var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
+      Assert.Equal((int)HttpStatusCode.OK, objectResult.StatusCode);
     }
   }
 }
