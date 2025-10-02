@@ -40,5 +40,110 @@ namespace QPlanning.Api.Unittests.Controllers
       var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
       Assert.Equal((int)HttpStatusCode.OK, objectResult.StatusCode);
     }
+
+    [Fact]
+    public async void AddKlantenCommand_ReturnsErrorWhenBudgetIsLessThan1()
+    {
+      // Arrange
+      var mockMediator = new Mock<IMediator>();
+      mockMediator
+        .Setup(med => med.Sent(It.IsAny<AddKlantCommand>(), It.IsAny<CancellationToken>()))
+        .ReturnsAsync(new BaseResponse("1", true, "OK"));
+
+      var controller = new KlantController(mockMediator.Object);
+
+      var command = new AddKlantCommand { Budget = 0};
+
+      // Act
+      var result = await controller.Add(command);
+
+      // Assert
+      var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
+      Assert.NotEqual((int)HttpStatusCode.OK, objectResult.StatusCode);
+    }
+
+    //Tests to check the start and end date for a klant
+    [Fact]
+    public async void AddKlantCommand_ReturnsOkWhenStartdatumIsToday()
+    {
+      // Arrange
+      var mockMediator = new Mock<IMediator>();
+      mockMediator
+        .Setup(med => med.Sent(It.IsAny<AddKlantCommand>(), It.IsAny<CancellationToken>()))
+        .ReturnsAsync(new BaseResponse("1", true, "OK"));
+
+      var controller = new KlantController(mockMediator.Object);
+
+      var command = new AddKlantCommand { Startdatum = System.DateTime.Today}
+
+      // Act
+      var result = await controller.Add(command);
+
+      // Assert
+      var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
+      Assert.Equal((int)HttpStatusCode.OK, objectResult.StatusCode);
+    }
+
+    [Fact]
+    public async void AddKlantCommand_ReturnsOkWhenEndDateDoesNotEqualStartDateAndIsNotBeforeStartDate();
+    {
+      // Arrange
+      var mockMediator = new Mock<IMediator>();
+      mockMediator
+        .Setup(med => med.Sent(It.IsAny<AddKlantCommand>(), It.IsAny<CancellationToken>()))
+        .ReturnsAsync(new BaseResponse("1", true, "OK"));
+
+      var controller = new KlantController(mockMediator.Object);
+
+      var command = new AddKlantCommand { Startdatum = System.DateTime.Today; EindDatum = System.DateTime.Today.AddDays(1)}
+
+      // Act
+      var result = await controller.Add(command);
+
+      // Assert
+      var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
+      Assert.Equal((int)HttpStatusCode.OK, objectResult.StatusCode);
+    }
+
+    [Fact]
+    public async void AddKlantCommand_ReturnsOkWhenStartDateInFuture()
+    {
+      // Arrange
+      var mockMediator = new Mock<IMediator>();
+      mockMediator
+        .Setup(med => med.Sent(It.IsAny<AddKlantCommand>(), It.IsAny<CancellationToken>()))
+        .ReturnsAsync(new BaseResponse("1", true, "OK"));
+
+      var controller = new KlantController(mockMediator.Object);
+
+      var command = new AddKlantCommand { Startdatum = System.DateTime.Today.AddDays(1)};
+
+      // Act
+      var result = await controller.Add(command);
+
+      // Assert
+      var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
+      Assert.Equal((int)HttpStatusCode.OK, objectResult.StatusCode);
+    }
+
+    [Fact]
+    public async void AddKlantCommand_ReturnsErrorWhenStartDateIsInPast()
+    {
+      // Arrange
+      var mockMediator = new Mock<IMediator>();
+      mockMediator
+        .Setup(med => med.Sent(It.IsAny<AddKlantCommand>(), It.IsAny<CancellationToken>()))
+        .ReturnsAsync(new BaseResponse("1", true, "OK"));
+
+      var controller = new KlantController(mockMediator.Object);
+
+      var command = new AddKlantCommand { Startdatum = System.DateTime.Today.AddDays(-1)};
+
+      // Act
+      var result = await controller.Add(command);
+
+      var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
+      Assert.NotEqual((int)HttpStatusCode.OK, objectResult);
+    }
   }
 }
