@@ -145,6 +145,9 @@ namespace QPlanning.Api.Unittests.Controllers
             // Assert
             var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
             Assert.Equal((int)HttpStatusCode.OK, objectResult.StatusCode);
+
+
+
         }
 
         [Fact]
@@ -232,7 +235,25 @@ namespace QPlanning.Api.Unittests.Controllers
             Assert.NotEqual((int)HttpStatusCode.OK, ObjectResult.StatusCode);
         }
 
-        //
-        //[Fact]
+        
+        [Fact]
+        public async void AddBoekingCommand_ReturnsOkWhenBoekingWeekIsMoreThan0()
+        {
+          // Arrange
+          var mockMediator = new Mock<IMediator>();
+          mockMediator
+            .Setup(med => med.Send(It.IsAny<AddBoekingCommand>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new BoekingResponse(0, true, "OK"));
+
+          var controller = new BoekingController(mockMediator.Object);
+
+          var command = new AddBoekingCommand { Weeknummer = 1};
+
+          // Act
+          var result = await controller.Add(command);
+
+          var ObjectResult = Assert.IsAssignableFrom<objectResult>(result);
+          Assert.Equal((int)HttpStatusCode.OK, ObjectResult.StatusCode);
+        }
     }
 }
