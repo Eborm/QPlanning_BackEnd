@@ -20,7 +20,7 @@ namespace QPlanning.Api.Unittests.Controllers
         //Tests to check the limits of how long a booking lasts
 
         [Fact]
-        public async void AddBoekingCommand_ReturnsErrorWhenBoekingLastsLongerThan24Hours()
+        public async Task AddBoekingCommand_ReturnsError_WhenBoekingLastsLongerThan24Hours()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -41,7 +41,7 @@ namespace QPlanning.Api.Unittests.Controllers
         }
 
         [Fact]
-        public async void AddBoekingCommand_ReturnErrorWhenBoekingLastsLessThan1Hours()
+        public async Task AddBoekingCommand_ReturnError_WhenBoekingLastsLessThan1Hours()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -62,7 +62,7 @@ namespace QPlanning.Api.Unittests.Controllers
         }
 
         [Fact]
-        public async void AddBoekingCommand_ReturnsOKWhenBoekingLasts24Hours()
+        public async Task AddBoekingCommand_ReturnsOK_WhenBoekingLasts24Hours()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -83,7 +83,7 @@ namespace QPlanning.Api.Unittests.Controllers
         }
 
         [Fact]
-        public async void AddBoekingCommand_ReturnsOKWhenBoekingLasts1Hours()
+        public async Task AddBoekingCommand_ReturnsOK_WhenBoekingLasts1Hours()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -106,7 +106,7 @@ namespace QPlanning.Api.Unittests.Controllers
 
         //Test to check when a booking can be added depending on date
         [Fact]
-        public async void AddBoekingCommand_ReturnsOKWhenBoekingDateIsToday()
+        public async Task AddBoekingCommand_ReturnsOK_WhenBoekingDateIsToday()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -127,7 +127,7 @@ namespace QPlanning.Api.Unittests.Controllers
         }
 
         [Fact]
-        public async void AddBoekingCommand_ReturnsOkWhenBoekingDateIsInFuture()
+        public async Task AddBoekingCommand_ReturnsOk_WhenBoekingDateIsInFuture()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -151,7 +151,7 @@ namespace QPlanning.Api.Unittests.Controllers
         }
 
         [Fact]
-        public async void AddBoekingCommand_ReturnsErrorWhenBoekingDateIsInPast()
+        public async Task AddBoekingCommand_ReturnsError_WhenBoekingDateIsInPast()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -173,7 +173,7 @@ namespace QPlanning.Api.Unittests.Controllers
 
         //Tests to check if a booking can be added depending on year
         [Fact]
-        public async void AddBoekingCommand_ReturnsOkWhenBookingYearIsThisYear()
+        public async Task AddBoekingCommand_ReturnsOk_WhenBookingYearIsThisYear()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -188,13 +188,13 @@ namespace QPlanning.Api.Unittests.Controllers
             // Act
             var result = await controller.Add(command);
 
-            //Assert
-            var ObjectResult = Assert.IsAssignableFrom<ObjectResult>(result);
-            Assert.Equal((int)HttpStatusCode.OK, ObjectResult.StatusCode);
+            // Assert
+            var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
+            Assert.Equal((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
 
         [Fact]
-        public async void AddboekingCommand_ReturnsOkWhenBookingYearIsInFuture()
+        public async Task AddboekingCommand_ReturnsOk_WhenBookingYearIsInFuture()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -210,12 +210,12 @@ namespace QPlanning.Api.Unittests.Controllers
             var result = await controller.Add(command);
 
             // Assert
-            var ObjectResult = Assert.IsAssignableFrom<ObjectResult>(result);
-            Assert.Equal((int)HttpStatusCode.OK, ObjectResult.StatusCode);
+            var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
+            Assert.Equal((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
 
         [Fact]
-        public async void AddBoekingCommand_ReturnsErrorWhenBookingYearIsInPast()
+        public async Task AddBoekingCommand_ReturnsError_WhenBookingYearIsInPast()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -231,13 +231,13 @@ namespace QPlanning.Api.Unittests.Controllers
             var result = await controller.Add(command);
 
             // Assert
-            var ObjectResult = Assert.IsAssignableFrom<ObjectResult>(result);
-            Assert.NotEqual((int)HttpStatusCode.OK, ObjectResult.StatusCode);
+            var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
+            Assert.NotEqual((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
 
         
         [Fact]
-        public async void AddBoekingCommand_ReturnsOkWhenBoekingWeekIsMoreThan0()
+        public async Task AddBoekingCommand_ReturnsOk_WhenBoekingWeekIsMoreThan0()
         {
           // Arrange
           var mockMediator = new Mock<IMediator>();
@@ -253,12 +253,12 @@ namespace QPlanning.Api.Unittests.Controllers
           var result = await controller.Add(command);
 
           // Assert
-          var ObjectResult = Assert.IsAssignableFrom<ObjectResult>(result);
-          Assert.Equal((int)HttpStatusCode.OK, ObjectResult.StatusCode);
+          var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
+          Assert.Equal((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
 
         [Fact]
-        public async void AddBoekingCommand_ReturnsOkWhenBoekingWeekIsLeseThan53()
+        public async Task AddBoekingCommand_ReturnsOk_WhenBoekingWeekIsLessThan53()
         {
           // Arrange
           var mockMediator = new Mock<IMediator>();
@@ -274,12 +274,12 @@ namespace QPlanning.Api.Unittests.Controllers
           var result = await controller.Add(command);
 
           // Assert
-          var ObjectResult = Assert.IsAssignableFrom<ObjectResult>(result);
-          Assert.Equal((int)HttpStatusCode.OK, ObjectResult.StatusCode);
+          var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
+          Assert.Equal((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
 
         [Fact]
-        public async void AddBoekingCommand_ReturnsErrorWhenBoekingWeekIsLessThan1()
+        public async Task AddBoekingCommand_ReturnsError_WhenBoekingWeekIsLessThan1()
         {
           // Arrange
           var mockMediator = new Mock<IMediator>();
@@ -295,12 +295,12 @@ namespace QPlanning.Api.Unittests.Controllers
           var result = await controller.Add(command);
 
           // Assert
-          var ObjectResult = Assert.IsAssignableFrom<ObjectResult>(result);
-          Assert.NotEqual((int)HttpStatusCode.OK, ObjectResult.StatusCode);
+          var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
+          Assert.NotEqual((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
 
         [Fact]
-        public async void AddBoekingCommand_ReturnsErrorWhenBoekingWeekIsMoreThan52()
+        public async Task AddBoekingCommand_ReturnsError_WhenBoekingWeekIsMoreThan52()
         {
           // Arrange
           var mockMediator = new Mock<IMediator>();
@@ -316,8 +316,8 @@ namespace QPlanning.Api.Unittests.Controllers
           var result = await controller.Add(command);
 
           // Assert
-          var ObjectResult = Assert.IsAssignableFrom<ObjectResult>(result);
-          Assert.NotEqual((int)HttpStatusCode.OK, ObjectResult.StatusCode);
+          var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
+          Assert.NotEqual((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace QPlanning.Api.Unittests.Controllers
         
         // Controleer dat het maken van een medewerker een error teruggeeft als Voornaam korter is dan 2 karakters
         [Fact]
-        public async Task AddMedewerkerCommand_ReturnErrorWhenFirstNameShorterThan2Characters()
+        public async Task AddMedewerkerCommand_ReturnError_WhenFirstNameShorterThan2Characters()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -42,7 +42,7 @@ namespace QPlanning.Api.Unittests.Controllers
         
         // Controleer dat het maken van een medewerker een error teruggeeft als Achternaam korter is dan 2 karakters
         [Fact]
-        public async Task AddMedewerkerCommand_ReturnErrorWhenLastNameShorterThan2Characters()
+        public async Task AddMedewerkerCommand_ReturnError_WhenLastNameShorterThan2Characters()
         {
             var mockMediator = new Mock<IMediator>();
             mockMediator
@@ -62,7 +62,7 @@ namespace QPlanning.Api.Unittests.Controllers
         
         // Controleer dat het maken van een medewerker geen error teruggeeft als Voornaam exact 2 karakters is
         [Fact]
-        public async Task AddMedewerkerCommand_ReturnOKWhenFirstNameIsExactly2Characters()
+        public async Task AddMedewerkerCommand_ReturnOK_WhenFirstNameIsExactly2Characters()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -83,7 +83,7 @@ namespace QPlanning.Api.Unittests.Controllers
         
         // Controleer dat het maken van een medewerker geen error teruggeeft als Achternaam exact 2 karakters lang is
         [Fact]
-        public async Task AddMedewerkerCommand_ReturnOKWhenLastNameIsExactly2Characters()
+        public async Task AddMedewerkerCommand_ReturnOK_WhenLastNameIsExactly2Characters()
         {
             var mockMediator = new Mock<IMediator>();
             mockMediator
@@ -103,7 +103,7 @@ namespace QPlanning.Api.Unittests.Controllers
         
         // Controleer dat het maken van een medewerker een error teruggeeft als Voornaam langer is dan 100 karakters
         [Fact]
-        public async Task AddMedewerkerCommand_ReturnErrorWhenFirstNameIsLongerThan100Characters()
+        public async Task AddMedewerkerCommand_ReturnError_WhenFirstNameIsLongerThan100Characters()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -126,7 +126,7 @@ namespace QPlanning.Api.Unittests.Controllers
         
         // Controleer dat het maken van een medewerker een error teruggeeft als Achternaam langer is dan 100 karakters
         [Fact]
-        public async Task AddMedewerkerCommand_ReturnErrorWhenLastNameIsLongerThan100Characters()
+        public async Task AddMedewerkerCommand_ReturnError_WhenLastNameIsLongerThan100Characters()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -148,7 +148,7 @@ namespace QPlanning.Api.Unittests.Controllers
                 
         // Controleer dat het maken van een medewerker een error teruggeeft als Tussenvoegsel langer is dan 50 karakters
         [Fact]
-        public async Task AddMedewerkerCommand_ReturnErrorWhenNamePrefixIsLongerThan50Characters()
+        public async Task AddMedewerkerCommand_ReturnError_WhenNamePrefixIsLongerThan50Characters()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -171,7 +171,7 @@ namespace QPlanning.Api.Unittests.Controllers
         
         // Controleer dat het maken van een medewerker geen error teruggeeft als Voornaam exact 100 karakters is
         [Fact]
-        public async Task AddMedewerkerCommand_ReturnOKWhenFirstNameIsExactly100Characters()
+        public async Task AddMedewerkerCommand_ReturnOK_WhenFirstNameIsExactly100Characters()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -194,7 +194,7 @@ namespace QPlanning.Api.Unittests.Controllers
         
         // Controleer dat het maken van een medewerker geen error teruggeeft als Achternaam exact 100 karakters lang is
         [Fact]
-        public async Task AddMedewerkerCommand_ReturnOKWhenLastNameIsExactly100Characters()
+        public async Task AddMedewerkerCommand_ReturnOK_WhenLastNameIsExactly100Characters()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -216,7 +216,7 @@ namespace QPlanning.Api.Unittests.Controllers
         
         // Controleer dat het maken van een medewerker geen error teruggeeft als Tussenvoegsel exact 50 karakters is
         [Fact]
-        public async Task AddMedewerkerCommand_ReturnOKWhenNamePrefixIsExactly50Characters()
+        public async Task AddMedewerkerCommand_ReturnOK_WhenNamePrefixIsExactly50Characters()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -246,7 +246,7 @@ namespace QPlanning.Api.Unittests.Controllers
         [InlineData("name@domain")]
         [InlineData("name@.com")]
         [InlineData("name@domain..com")]
-        public async Task AddMedewerkerCommand_ReturnErrorWhenEmailIsInvalid(string invalidEmail)
+        public async Task AddMedewerkerCommand_ReturnError_WhenEmailIsInvalid(string invalidEmail)
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -268,9 +268,9 @@ namespace QPlanning.Api.Unittests.Controllers
         // Controleer dat het maken van een medewerker geen error geeft als Email geldig is
         [Theory]
         [InlineData("a@b.c")]
-        [InlineData("john.doe@example.com")]
-        [InlineData("user+alias@sub.domain.co.uk")]
-        public async Task AddMedewerkerCommand_ReturnsOkWhenEmailIsValid(string validEmail)
+        [InlineData("some.person@example.com")]
+        [InlineData("user+alias@sub.domain.nl")]
+        public async Task AddMedewerkerCommand_ReturnsOK_WhenEmailIsValid(string validEmail)
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -291,7 +291,7 @@ namespace QPlanning.Api.Unittests.Controllers
         
         // Controleer dat het maken van een medewerker een error teruggeeft als een email langer is dan 254 karakters
         [Fact]
-        public async Task AddMedewerkerCommand_ReturnErrorWhenEmailIsLongerThan254Characters()
+        public async Task AddMedewerkerCommand_ReturnError_WhenEmailIsLongerThan254Characters()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -316,7 +316,7 @@ namespace QPlanning.Api.Unittests.Controllers
         
         // Controleer dat het maken van een medewerker geen error teruggeeft als een email exact 254 karakters is
         [Fact]
-        public async Task AddMedewerkerCommand_ReturnsOkWhenEmailIsExactly254Characters()
+        public async Task AddMedewerkerCommand_ReturnsOK_WhenEmailIsExactly254Characters()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -326,7 +326,7 @@ namespace QPlanning.Api.Unittests.Controllers
 
             var controller = new MedewerkerController(mockMediator.Object);
             
-            string localPart = new string('a', 242); // 254 - 12 for the domain part
+            string localPart = new string('a', 242); // 254 - 12 voor het domein gedeelte
             var email = $"{localPart}@example.com";
 
             var command = new AddMedewerkerCommand { Email = email };
@@ -341,7 +341,7 @@ namespace QPlanning.Api.Unittests.Controllers
         
         // Controleer dat het maken van een medewerker een error teruggeeft als Tarief 0 is
         [Fact]
-        public async Task AddMedewerkerCommand_ReturnsErrorWhenTarifIsZero()
+        public async Task AddMedewerkerCommand_ReturnsError_WhenTarifIsZero()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -362,7 +362,7 @@ namespace QPlanning.Api.Unittests.Controllers
         
         // Controleer dat het maken van een medewerker een error teruggeeft als InternTarief 0 is
         [Fact]
-        public async Task AddMedewerkerCommand_ReturnsErrorWhenInternalTarifIsZero()
+        public async Task AddMedewerkerCommand_ReturnsError_WhenInternalTarifIsZero()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -383,7 +383,7 @@ namespace QPlanning.Api.Unittests.Controllers
         
         // Controleer dat het maken van een medewerker geen error teruggeeft als Tarief 1 is
         [Fact]
-        public async Task AddMedewerkerCommand_ReturnsOKWhenTarifIsOne()
+        public async Task AddMedewerkerCommand_ReturnsOK_WhenTarifIsOne()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
@@ -404,7 +404,7 @@ namespace QPlanning.Api.Unittests.Controllers
         
         // Controleer dat het maken van een medewerker geen error teruggeeft als InternTarief 1 is
         [Fact]
-        public async Task AddMedewerkerCommand_ReturnsOKWhenInternalTarifIsOne()
+        public async Task AddMedewerkerCommand_ReturnsOK_WhenInternalTarifIsOne()
         {
             // Arrange
             var mockMediator = new Mock<IMediator>();
