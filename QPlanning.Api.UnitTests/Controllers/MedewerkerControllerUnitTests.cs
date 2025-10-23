@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Azure;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using QPlanning.Api.Controllers;
 using QPlanning.Business.Dto.Base.UseCaseResponses;
@@ -23,7 +22,7 @@ namespace QPlanning.Api.Unittests
             var mockMediator = new Mock<IMediator>();
             mockMediator
                 .Setup(med => med.Send(It.IsAny<AddMedewerkerCommand>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(new BaseResponse(0, true, "OK"));
+                .ReturnsAsync(new BaseResponse("1", true, "OK"));
 
             var controller = new MedewerkerController(mockMediator.Object);
 
