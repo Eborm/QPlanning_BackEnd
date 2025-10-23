@@ -31,7 +31,7 @@ namespace QPlanning.Api.Unittests.Controllers
 
       var controller = new KlantController(mockMediator.Object);
 
-      var command = new AddKlantCommand { Budget = 1};
+      var command = new AddKlantCommand { Budget = 1 };
 
       // Act
       var result = await controller.Add(command);
