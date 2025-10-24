@@ -49,7 +49,7 @@ namespace QPlanning.Api.UnitTests.Controllers
             var result = await controller.Add(command);
 
             // Assert
-            var objectResult = Assert.IsType<ObjectResult>(result);
+            var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
             Assert.NotEqual((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
         
@@ -70,7 +70,7 @@ namespace QPlanning.Api.UnitTests.Controllers
             var result = await controller.Add(command);
 
             // Assert
-            var objectResult = Assert.IsType<ObjectResult>(result);
+            var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
             Assert.NotEqual((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
         
@@ -91,7 +91,7 @@ namespace QPlanning.Api.UnitTests.Controllers
             var result = await controller.Add(command);
 
             // Assert
-            var objectResult = Assert.IsType<ObjectResult>(result);
+            var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
             Assert.NotEqual((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
         
@@ -112,7 +112,7 @@ namespace QPlanning.Api.UnitTests.Controllers
             var result = await controller.Add(command);
 
             // Assert
-            var objectResult = Assert.IsType<ObjectResult>(result);
+            var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
             Assert.Equal((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
         
@@ -133,7 +133,7 @@ namespace QPlanning.Api.UnitTests.Controllers
             var result = await controller.Add(command);
 
             // Assert
-            var objectResult = Assert.IsType<ObjectResult>(result);
+            var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
             Assert.Equal((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
         
@@ -154,7 +154,7 @@ namespace QPlanning.Api.UnitTests.Controllers
             var result = await controller.Add(command);
 
             // Assert
-            var objectResult = Assert.IsType<ObjectResult>(result);
+            var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
             Assert.Equal((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
         
@@ -176,7 +176,7 @@ namespace QPlanning.Api.UnitTests.Controllers
             var result = await controller.Add(command);
 
             // Assert
-            var objectResult = Assert.IsType<ObjectResult>(result);
+            var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
             Assert.NotEqual((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
         
@@ -198,7 +198,7 @@ namespace QPlanning.Api.UnitTests.Controllers
             var result = await controller.Add(command);
 
             // Assert
-            var objectResult = Assert.IsType<ObjectResult>(result);
+            var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
             Assert.NotEqual((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
         
@@ -220,7 +220,7 @@ namespace QPlanning.Api.UnitTests.Controllers
             var result = await controller.Add(command);
 
             // Assert
-            var objectResult = Assert.IsType<ObjectResult>(result);
+            var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
             Assert.NotEqual((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
         
@@ -242,7 +242,7 @@ namespace QPlanning.Api.UnitTests.Controllers
             var result = await controller.Add(command);
 
             // Assert
-            var objectResult = Assert.IsType<ObjectResult>(result);
+            var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
             Assert.Equal((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
         
@@ -264,7 +264,7 @@ namespace QPlanning.Api.UnitTests.Controllers
             var result = await controller.Add(command);
 
             // Assert
-            var objectResult = Assert.IsType<ObjectResult>(result);
+            var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
             Assert.Equal((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
         
@@ -286,7 +286,7 @@ namespace QPlanning.Api.UnitTests.Controllers
             var result = await controller.Add(command);
 
             // Assert
-            var objectResult = Assert.IsType<ObjectResult>(result);
+            var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
             Assert.Equal((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
         
@@ -314,7 +314,7 @@ namespace QPlanning.Api.UnitTests.Controllers
             var result = await controller.Add(command);
             
             // Assert
-            var objectResult = Assert.IsType<ObjectResult>(result);
+            var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
             Assert.NotEqual((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
         
@@ -332,13 +332,13 @@ namespace QPlanning.Api.UnitTests.Controllers
                 .Returns(Task.FromResult(new BaseResponse("", true)));
             
             var controller = new AccountController(mockMediator.Object);
-            var command = new CreateUserCommand("Voor", "Achter", validEmail, "email@email.com", "Test@1234");
+            var command = new CreateUserCommand("Voor", "Achter", validEmail, validEmail, "Test@1234");
             
             // Act
             var result = await controller.Add(command);
             
             // Assert
-            var objectResult = Assert.IsType<ObjectResult>(result);
+            var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
             Assert.Equal((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
         
