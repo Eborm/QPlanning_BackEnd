@@ -12,7 +12,7 @@ using QPlanning.Business.UseCases.Medewerkers.Add.Dto.Command;
 using QPlanning.Infrastructure.Data.EntityFramework.QPlanningContext.Entities;
 using Xunit;
 
-namespace QPlanning.Api.Unittests.Controllers
+namespace QPlanning.Api.UnitTests.Controllers
 {
     public class MedewerkerControllerUnitTests
     {

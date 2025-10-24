@@ -15,7 +15,7 @@ using Microsoft.VisualBasic.FileIO;
 using QPlanning.Business.UseCases.Klanten.Add.Dto.Commands;
 using QPlanning.Business.UseCases.Klanten.Get.Dto.Responses;
 
-namespace QPlanning.Api.Unittests.Controllers
+namespace QPlanning.Api.UnitTests.Controllers
 {
     public class KlantControllerUnitTests
     {

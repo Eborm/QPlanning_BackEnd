@@ -13,7 +13,7 @@ using QPlanning.Business.UseCases.Boeking.Get.Models;
 using QPlanning.Business.UseCases.Boeking.Dto;
 using Microsoft.VisualBasic.FileIO;
 
-namespace QPlanning.Api.Unittests.Controllers
+namespace QPlanning.Api.UnitTests.Controllers
 {
     public class BoekingControllerUnitTests
     {
