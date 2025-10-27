@@ -17,7 +17,7 @@ namespace QPlanning.Business.UseCases.Klanten.Get.Models
         public string MedewerkerNaam { get; set; }
         public string VerantwoordelijkTeamNaam { get; set; }
         public List<string> PlandbaarDoorTeamNamen { get; set; }
-        
-        
+
+
     }
 }

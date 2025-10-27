@@ -13,11 +13,11 @@ namespace QPlanning.Business.Services
         {
             _boekjaarRepository = boekjaarRepository;
         }
-        
+
         public async Task<BaseResponse> AddBoekjarenRawSql(int jaar, int bedrag)
         {
             var result = await _boekjaarRepository.AddBoekjarenRawSql(jaar, bedrag);
-            return new BaseResponse (result.Id, result.Success, $"Het toevoegen van de nieuwe boekjaren met jaartal: {jaar} en een bedrag van: {bedrag} is gelukt.");
+            return new BaseResponse(result.Id, result.Success, $"Het toevoegen van de nieuwe boekjaren met jaartal: {jaar} en een bedrag van: {bedrag} is gelukt.");
         }
     }
 }
