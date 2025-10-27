@@ -16,5 +16,15 @@ namespace QPlanning.Business.UseCases.Medewerkers.Add.Dto.Command
         
         public List<int> PlanbaarDoorTeamIds { get; set; }
         public int TeamId { get; set; }
+
+        public AddMedewerkerCommand(string voornaam, string achternaam, string tussenVoegsel, string email, int tarief, int internTarief)
+        {
+            Voornaam = voornaam;
+            Achternaam = achternaam;
+            TussenVoegsel = tussenVoegsel;
+            Email = email;
+            Tarief = tarief;
+            InternTarief = internTarief;
+        }
     }
 }

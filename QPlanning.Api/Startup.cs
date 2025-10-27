@@ -1,4 +1,6 @@
 using Autofac;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -18,6 +20,7 @@ using QPlanning.Business.Extensions;
 using QPlanning.Business.Interfaces.Services;
 using QPlanning.Business.Services;
 using QPlanning.Business.UseCases.Authentication.Login.Dto.Command;
+using QPlanning.Business.UseCases.Medewerkers.Add.Dto.Command;
 using QPlanning.Common.Auth;
 using QPlanning.Infrastructure;
 using QPlanning.Infrastructure.Extensions;
@@ -42,6 +45,9 @@ namespace QPlanning.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson();
+
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssemblyContaining<AddMedewerkerCommand>();
 
             //Add framework service
             services.AddDataAccessServices(Configuration);

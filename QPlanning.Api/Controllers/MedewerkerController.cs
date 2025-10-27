@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ using QPlanning.Business.UseCases.Medewerkers.Add.Dto.Command;
 using QPlanning.Business.UseCases.Medewerkers.Edit.Dto.Command;
 using QPlanning.Business.UseCases.Medewerkers.Get.Dto.Command;
 using QPlanning.Business.UseCases.Medewerkers.Toggle.Dto.Command;
+using QPlanning.Business.Validators;
 
 namespace QPlanning.Api.Controllers
 {
@@ -44,6 +46,21 @@ namespace QPlanning.Api.Controllers
         [Authorize(Policy = Policies.ElevatedRights)]
         public async Task<ActionResult> Add(AddMedewerkerCommand command)
         {
+            var validator = new AddMedewerkerCommandValidator();
+            var validationResult = validator.Validate(command);
+
+            if (!validationResult.IsValid)
+            {
+                var errors = validationResult.Errors
+                    .GroupBy(e => e.PropertyName)
+                    .ToDictionary(
+                        g => g.Key,
+                        g => g.Select(e => e.ErrorMessage).ToArray()
+                    );
+                
+                return BadRequest(new { Success = false, Errors = errors });
+            }
+
             var result = await Mediator.Send(command);
             return result.Success ? Ok(result) : (ObjectResult)BadRequest(result);
         }

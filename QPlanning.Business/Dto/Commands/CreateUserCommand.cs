@@ -5,7 +5,7 @@ namespace QPlanning.Business.Dto.Commands
 {
 	public class CreateUserCommand : IRequest<BaseResponse>
 	{
-		public CreateUserCommand(string voornaam, string achternaam, string email, string userName ,string password)
+		public CreateUserCommand(string voornaam, string achternaam, string email, string userName, string password)
 		{
 			Voornaam = voornaam;
 			Achternaam = achternaam;
