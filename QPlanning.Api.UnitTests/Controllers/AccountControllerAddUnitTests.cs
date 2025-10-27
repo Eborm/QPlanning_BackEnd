@@ -8,10 +8,11 @@ using Xunit;
 using QPlanning.Api.Controllers;
 using QPlanning.Business.Dto.Base.UseCaseResponses;
 using QPlanning.Business.Dto.Commands;
+using QPlanning.Business.UseCases.Authentication.Account.Update.Dto.Command;
 
 namespace QPlanning.Api.UnitTests.Controllers
 {
-    public class AccountControllerUnitTests
+    public class AccountControllerAddUnitTests
     {
         [Fact]
         public async void CreateUserPost_ReturnsOK_WhenMediatorSendIsCalledCorrectly()

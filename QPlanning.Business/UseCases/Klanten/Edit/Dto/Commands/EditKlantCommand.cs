@@ -15,14 +15,24 @@ namespace QPlanning.Business.UseCases.Klanten.Edit.Dto.Commands
         public DateTime? Einddatum { get; set; }
         public int VerantwoordelijkTeamId { get; set; }
         public int MedewerkerId { get; set; }
-
-        #region navigation properties
-        /// <summary>
-        /// The team that is responsible for the customer.
-        /// </summary>
+        
         public DomainModelTeam VerantwoordelijkTeam { get; set; }
         public IEnumerable<int> PlanbaarDoorTeamIds { get; set; }
         public IEnumerable<DomainModelBoekjaar> Boekjaren { get; set; }
-        #endregion
+
+        public EditKlantCommand(int id, string naam, DateTime? startDatum, DateTime? eindDatum,
+            int verantwoordelijkTeamId, int medewerkerId, DomainModelTeam verantwoordelijkTeam,
+            IEnumerable<int> planbaarDoorTeamIds, IEnumerable<DomainModelBoekjaar> boekjaren)
+        {
+            Id = id;
+            Naam = naam;
+            Startdatum = startDatum;
+            Einddatum = eindDatum;
+            VerantwoordelijkTeamId = verantwoordelijkTeamId;
+            MedewerkerId = medewerkerId;
+            VerantwoordelijkTeam = verantwoordelijkTeam;
+            PlanbaarDoorTeamIds = planbaarDoorTeamIds;
+            Boekjaren = boekjaren;
+        }
     }
 }

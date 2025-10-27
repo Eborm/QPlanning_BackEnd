@@ -54,6 +54,22 @@ namespace QPlanning.Api.Controllers
 		[Route("update")]
 		public async Task<ActionResult> Update([FromBody] UpdateUserCommand command)
 		{
+			var validator = new UpdateUserCommandValidator();
+			var validationResult = await validator.ValidateAsync(command);
+
+			if (!validationResult.IsValid)
+			{
+				var errors = validationResult.Errors
+					.GroupBy(e => e.PropertyName)
+					.ToDictionary
+					(
+						g => g.Key,
+						g => g.Select(e => e.ErrorMessage).ToArray()
+					);
+				
+				return BadRequest(new { Success = false, Errors = errors });
+			}
+			
 			var result = await Mediator.Send(command);
 			return result.Success ? Ok(result) : (ObjectResult)BadRequest(result);
 		}

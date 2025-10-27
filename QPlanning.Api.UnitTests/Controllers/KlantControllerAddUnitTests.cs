@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,14 +15,16 @@ using QPlanning.Business.UseCases.Boeking.Add.Dto;
 using QPlanning.Business.UseCases.Boeking.Get.Models;
 using QPlanning.Business.UseCases.Boeking.Dto;
 using Microsoft.VisualBasic.FileIO;
+using QPlanning.Business.Domain.Entities;
 using QPlanning.Business.UseCases.Klanten.Add.Dto.Commands;
+using QPlanning.Business.UseCases.Klanten.Edit.Dto.Commands;
 using QPlanning.Business.UseCases.Klanten.Get.Dto.Responses;
 
 namespace QPlanning.Api.UnitTests.Controllers
 {
-    public class KlantControllerUnitTests
+    public class KlantControllerAddUnitTests
     {
-        private AddKlantCommand CreateCommand(
+        private AddKlantCommand CreateAddCommand(
             int id = 1,
             string name = "Some company",
             DateTime startDatum = default,
@@ -36,8 +39,7 @@ namespace QPlanning.Api.UnitTests.Controllers
             if (eindDatum == default) eindDatum = DateTime.Now.AddDays(1);
             if (planbaarDoorTeamsIds == default)
             {
-                planbaarDoorTeamsIds = new List<int>();
-                planbaarDoorTeamsIds.Add(1);
+                planbaarDoorTeamsIds = [1];
             }
             
             return new AddKlantCommand(
@@ -65,7 +67,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
             var controller = new KlantController(mockMediator.Object);
 
-            var command = CreateCommand(name: "a");
+            var command = CreateAddCommand(name: "a");
 
             // Act
             var result = await controller.Add(command);
@@ -87,7 +89,7 @@ namespace QPlanning.Api.UnitTests.Controllers
             var controller = new KlantController(mockMediator.Object);
             
             string longName = new string('a', 101);
-            var command = CreateCommand(name: longName);
+            var command = CreateAddCommand(name: longName);
 
             // Act
             var result = await controller.Add(command);
@@ -108,7 +110,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
             var controller = new KlantController(mockMediator.Object);
 
-            var command = CreateCommand(name: "aa");
+            var command = CreateAddCommand(name: "aa");
 
             // Act
             var result = await controller.Add(command);
@@ -130,7 +132,7 @@ namespace QPlanning.Api.UnitTests.Controllers
             var controller = new KlantController(mockMediator.Object);
 
             string longName = new string('a', 100);
-            var command = CreateCommand(name: longName);
+            var command = CreateAddCommand(name: longName);
 
             // Act
             var result = await controller.Add(command);
@@ -152,7 +154,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
               var controller = new KlantController(mockMediator.Object);
 
-              var command = CreateCommand(budget: 1);
+              var command = CreateAddCommand(budget: 1);
 
               // Act
               var result = await controller.Add(command);
@@ -173,7 +175,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
               var controller = new KlantController(mockMediator.Object);
 
-              var command = CreateCommand(budget: 0);
+              var command = CreateAddCommand(budget: 0);
 
               // Act
               var result = await controller.Add(command);
@@ -195,7 +197,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
             var controller = new KlantController(mockMediator.Object);
 
-            var command = CreateCommand(startDatum: DateTime.Today);
+            var command = CreateAddCommand(startDatum: DateTime.Today);
 
             // Act
             var result = await controller.Add(command);
@@ -216,7 +218,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
             var controller = new KlantController(mockMediator.Object);
 
-            var command = CreateCommand(startDatum: DateTime.Today, eindDatum: DateTime.Today.AddDays(1));
+            var command = CreateAddCommand(startDatum: DateTime.Today, eindDatum: DateTime.Today.AddDays(1));
 
             // Act
             var result = await controller.Add(command);
@@ -237,7 +239,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
             var controller = new KlantController(mockMediator.Object);
 
-            var command = CreateCommand(startDatum: DateTime.Today.AddDays(1));
+            var command = CreateAddCommand(startDatum: DateTime.Today.AddDays(1));
 
             // Act
             var result = await controller.Add(command);
@@ -258,7 +260,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
             var controller = new KlantController(mockMediator.Object);
 
-            var command = CreateCommand(startDatum: DateTime.Today.AddDays(-1));
+            var command = CreateAddCommand(startDatum: DateTime.Today.AddDays(-1));
 
             // Act
             var result = await controller.Add(command);
@@ -279,7 +281,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
             var controller = new KlantController(mockMediator.Object);
 
-            var command = CreateCommand(startDatum: DateTime.Today, eindDatum: DateTime.Today.AddDays(-1));
+            var command = CreateAddCommand(startDatum: DateTime.Today, eindDatum: DateTime.Today.AddDays(-1));
 
             // Act
             var result = await controller.Add(command);
