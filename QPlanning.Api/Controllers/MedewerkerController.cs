@@ -19,7 +19,7 @@ namespace QPlanning.Api.Controllers
         public MedewerkerController(IMediator mediator) : base(mediator)
         {
         }
-        
+
         [HttpGet]
         [Route("getMedewerkers")]
         [Authorize(Policy = Policies.ElevatedRights)]
@@ -28,7 +28,7 @@ namespace QPlanning.Api.Controllers
             var result = await Mediator.Send(command);
             return result.Medewerkers != null ? Ok(result) : (ObjectResult)BadRequest(result);
         }
-        
+
         [HttpGet]
         [Route("getDropDownValues")]
         [Authorize(Policy = Policies.ElevatedRights)]
@@ -37,7 +37,7 @@ namespace QPlanning.Api.Controllers
             var result = await Mediator.Send(command);
             return result.MedewerkerFunctieDropDown != null ? Ok(result) : (ObjectResult)BadRequest(result);
         }
-        
+
         //Post api/medewerker/add
         [HttpPost]
         [Route("add")]
@@ -47,7 +47,7 @@ namespace QPlanning.Api.Controllers
             var result = await Mediator.Send(command);
             return result.Success ? Ok(result) : (ObjectResult)BadRequest(result);
         }
-        
+
         //Put api/medewerker/update
         [HttpPut]
         [Route("update")]
@@ -57,7 +57,7 @@ namespace QPlanning.Api.Controllers
             var result = await Mediator.Send(command);
             return result.Success ? Ok(result) : (ObjectResult)BadRequest(result);
         }
-        
+
         //Post api/medewerker/delete
         [HttpPost]
         [Route("delete")]
