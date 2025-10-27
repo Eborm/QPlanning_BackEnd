@@ -47,13 +47,14 @@ namespace QPlanning.Api.Controllers
         public async Task<ActionResult> Add(AddMedewerkerCommand command)
         {
             var validator = new AddMedewerkerCommandValidator();
-            var validationResult = validator.Validate(command);
+            var validationResult = await validator.ValidateAsync(command);
 
             if (!validationResult.IsValid)
             {
                 var errors = validationResult.Errors
                     .GroupBy(e => e.PropertyName)
-                    .ToDictionary(
+                    .ToDictionary
+                    (
                         g => g.Key,
                         g => g.Select(e => e.ErrorMessage).ToArray()
                     );

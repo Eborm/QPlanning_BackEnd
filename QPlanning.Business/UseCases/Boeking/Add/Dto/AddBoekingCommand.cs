@@ -20,5 +20,21 @@ namespace QPlanning.Business.UseCases.Boeking.Add.Dto
         public int? KlantId { get; set; }
         public int? OpdrachtId { get; set; }
         public int? IndirecteUrenId { get; set; }
+
+        public AddBoekingCommand(
+                int? id, int? jaar, int? boekjaar, int? weeknummer, int uren, DateTime plannedDate,
+                int? medewerkerId, int? klantId, int? opdrachtId, int? indirecteUrenId)
+        {
+            Id = id;
+            Jaar = jaar;
+            Boekjaar = boekjaar;
+            Weeknummer = weeknummer;
+            Uren = uren;
+            PlannedDate = plannedDate;
+            MedewerkerId = medewerkerId;
+            KlantId = klantId;
+            OpdrachtId = opdrachtId;
+            IndirecteUrenId = indirecteUrenId;
+        }
     }
 }

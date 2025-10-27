@@ -10,6 +10,7 @@ using QPlanning.Business.Dto.Commands;
 using QPlanning.Business.UseCases.Authentication.Account.Update.Dto.Command;
 using QPlanning.Business.UseCases.Authorization.Claims.Roles.Create.Dto.Command;
 using QPlanning.Business.UseCases.Authorization.Claims.Roles.Delete.Dto.Command;
+using QPlanning.Business.Validators;
 
 namespace QPlanning.Api.Controllers
 {
@@ -26,6 +27,22 @@ namespace QPlanning.Api.Controllers
 		[Route("add")]
 		public async Task<ActionResult> Add([FromBody] CreateUserCommand command)
 		{
+			var validator = new CreateUserCommandValidator();
+			var validationResult = await validator.ValidateAsync(command);
+
+			if (!validationResult.IsValid)
+			{
+				var errors = validationResult.Errors
+					.GroupBy(e => e.PropertyName)
+					.ToDictionary
+					(
+						g => g.Key,
+						g => g.Select(e => e.ErrorMessage).ToArray()
+					);
+
+				return BadRequest(new { Success = false, Errors = errors });
+			}
+			
 			var result = await Mediator.Send(command);
 			return result.Success ? Ok(result) : (ObjectResult)BadRequest(result);
 		}

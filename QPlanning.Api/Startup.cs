@@ -24,11 +24,15 @@ using QPlanning.Business.UseCases.Medewerkers.Add.Dto.Command;
 using QPlanning.Common.Auth;
 using QPlanning.Infrastructure;
 using QPlanning.Infrastructure.Extensions;
+using QPlanning.Business.Dto.Commands;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Reflection;
 using System.Security.Claims;
+using QPlanning.Business.UseCases.Boeking.Add.Dto;
+using QPlanning.Business.UseCases.Klanten.Add.Dto.Commands;
+using QPlanning.Business.Validators;
 
 namespace QPlanning.Api
 {
@@ -48,6 +52,9 @@ namespace QPlanning.Api
 
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssemblyContaining<AddMedewerkerCommand>();
+            services.AddValidatorsFromAssemblyContaining<CreateUserCommand>();
+            services.AddValidatorsFromAssemblyContaining<AddBoekingCommand>();
+            services.AddValidatorsFromAssemblyContaining<AddKlantCommand>();
 
             //Add framework service
             services.AddDataAccessServices(Configuration);

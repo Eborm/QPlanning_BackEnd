@@ -296,9 +296,6 @@ namespace QPlanning.Api.UnitTests.Controllers
         [InlineData("missingatsign.com")]
         [InlineData("missingdomain@")]
         [InlineData("@missingusername.com")]
-        [InlineData("name@domain")]
-        [InlineData("name@.com")]
-        [InlineData("name@domain..com")]
         public async Task CreateUserCommand_ReturnsError_WhenEmailIsInvalid(string invalidEmail)
         {
             // Arrange

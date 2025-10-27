@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -11,6 +12,7 @@ using QPlanning.Business.UseCases.Boeking.Delete.Dto;
 using QPlanning.Business.UseCases.Boeking.Get;
 using QPlanning.Business.UseCases.Boeking.Get.Dto;
 using QPlanning.Business.UseCases.Boeking.Update.Dto;
+using QPlanning.Business.Validators;
 
 namespace QPlanning.Api.Controllers
 {
@@ -93,6 +95,22 @@ namespace QPlanning.Api.Controllers
         [Authorize(Policy = Policies.ElevatedRights)]
         public async Task<ActionResult> Add(AddBoekingCommand command)
         {
+            var validator = new AddBoekingCommandValidator();
+            var validationResult = await validator.ValidateAsync(command);
+
+            if (!validationResult.IsValid)
+            {
+                var errors = validationResult.Errors
+                    .GroupBy(e => e.PropertyName)
+                    .ToDictionary
+                    (
+                        g => g.Key,
+                        g => g.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                return BadRequest(new { Success = false, Errors = errors });
+            }
+            
             var result = await Mediator.Send(command);
             return result.Success ? Ok(result) : (ObjectResult)BadRequest(result);
         }
