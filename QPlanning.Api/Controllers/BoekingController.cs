@@ -121,6 +121,22 @@ namespace QPlanning.Api.Controllers
         [Authorize(Policy = Policies.ElevatedRights)]
         public async Task<ActionResult> Update(UpdateBoekingCommand command)
         {
+            var validator = new UpdateBoekingCommandValidator();
+            var validationResult = await validator.ValidateAsync(command);
+
+            if (!validationResult.IsValid)
+            {
+                var errors = validationResult.Errors
+                    .GroupBy(e => e.PropertyName)
+                    .ToDictionary
+                    (
+                        g => g.Key,
+                        g => g.Select(e => e.ErrorMessage).ToArray()
+                    );
+                
+                return BadRequest(new { Success = false, Errors = errors });
+            }
+            
             var result = await Mediator.Send(command);
             return result.Success ? Ok(result) : (ObjectResult)BadRequest(result);
         }

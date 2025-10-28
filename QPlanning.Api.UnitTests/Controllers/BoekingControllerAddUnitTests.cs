@@ -16,9 +16,9 @@ using Microsoft.VisualBasic.FileIO;
 
 namespace QPlanning.Api.UnitTests.Controllers
 {
-    public class BoekingControllerUnitTests
+    public class BoekingControllerAddUnitTests
     {
-        private AddBoekingCommand CreateCommand(
+        private AddBoekingCommand CreateAddCommand(
             int id = 1,
             int jaar = 2025,
             int boekjaar = 2025,
@@ -48,7 +48,6 @@ namespace QPlanning.Api.UnitTests.Controllers
         }
         
         //Tests to check the limits of how long a booking lasts
-
         [Fact]
         public async Task AddBoekingCommand_ReturnsError_WhenBoekingLastsLongerThan24Hours()
         {
@@ -60,7 +59,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
             var controller = new BoekingController(mockMediator.Object);
 
-            var command = CreateCommand(uren: 25);
+            var command = CreateAddCommand(uren: 25);
             // Act
             var result = await controller.Add(command);
 
@@ -80,7 +79,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
             var controller = new BoekingController(mockMediator.Object);
 
-            var command = CreateCommand(uren: 0);
+            var command = CreateAddCommand(uren: 0);
 
             // Act
             var result = await controller.Add(command);
@@ -101,7 +100,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
             var controller = new BoekingController (mockMediator.Object);
 
-            var command = CreateCommand(uren: 24);
+            var command = CreateAddCommand(uren: 24);
 
             // Act
             var result = await controller.Add(command);
@@ -122,7 +121,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
             var controller = new BoekingController(mockMediator.Object);
 
-            var command = CreateCommand(uren: 1);
+            var command = CreateAddCommand(uren: 1);
 
             // Act
             var result = await controller.Add(command);
@@ -145,7 +144,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
             var controller = new BoekingController(mockMediator.Object);
 
-            var command = CreateCommand(plannedDate: DateTime.Today);
+            var command = CreateAddCommand(plannedDate: DateTime.Today);
 
             // Act
             var result = await controller.Add(command);
@@ -166,7 +165,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
             var controller = new BoekingController(mockMediator.Object);
 
-            var command = CreateCommand(plannedDate: System.DateTime.Today.AddDays(1));
+            var command = CreateAddCommand(plannedDate: System.DateTime.Today.AddDays(1));
         
             // Act
             var result = await controller.Add(command);
@@ -187,7 +186,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
             var controller = new BoekingController(mockMediator.Object);
 
-            var command = CreateCommand(plannedDate: System.DateTime.Today.AddDays(-1));
+            var command = CreateAddCommand(plannedDate: System.DateTime.Today.AddDays(-1));
 
             // Act
             var result = await controller.Add(command);
@@ -209,7 +208,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
             var controller = new BoekingController(mockMediator.Object);
 
-            var command = CreateCommand(boekjaar: System.DateTime.Today.Year);
+            var command = CreateAddCommand(boekjaar: System.DateTime.Today.Year);
 
             // Act
             var result = await controller.Add(command);
@@ -230,7 +229,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
             var controller = new BoekingController(mockMediator.Object);
 
-            var command = CreateCommand (boekjaar: System.DateTime.Today.Year + 1);
+            var command = CreateAddCommand (boekjaar: System.DateTime.Today.Year + 1);
         
             // Act
             var result = await controller.Add(command);
@@ -251,7 +250,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
             var controller = new BoekingController(mockMediator.Object);
 
-            var command = CreateCommand (boekjaar: System.DateTime.Today.Year - 1);
+            var command = CreateAddCommand (boekjaar: System.DateTime.Today.Year - 1);
 
             // Act
             var result = await controller.Add(command);
@@ -273,7 +272,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
           var controller = new BoekingController(mockMediator.Object);
 
-          var command = CreateCommand(weeknummer: 1);
+          var command = CreateAddCommand(weeknummer: 1);
 
           // Act
           var result = await controller.Add(command);
@@ -294,7 +293,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
           var controller = new BoekingController(mockMediator.Object);
 
-          var command = CreateCommand(weeknummer: 52);
+          var command = CreateAddCommand(weeknummer: 52);
 
           // Act
           var result = await controller.Add(command);
@@ -315,7 +314,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
           var controller = new BoekingController(mockMediator.Object);
 
-          var command = CreateCommand(weeknummer: 0);
+          var command = CreateAddCommand(weeknummer: 0);
 
           // Act
           var result = await controller.Add(command);
@@ -336,7 +335,7 @@ namespace QPlanning.Api.UnitTests.Controllers
 
           var controller = new BoekingController(mockMediator.Object);
 
-          var command = CreateCommand(weeknummer: 53);
+          var command = CreateAddCommand(weeknummer: 53);
 
           // Act
           var result = await controller.Add(command);

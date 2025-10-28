@@ -19,5 +19,19 @@ namespace QPlanning.Business.UseCases.Medewerkers.Edit.Dto.Command
         
         public List<int> PlanbaarDoorTeamIds { get; set; }
         public int TeamId { get; set; }
+
+        public EditMedewerkerCommand(int id, string voornaam, string tussenVoegsel, string achternaam,
+            string email, int? tarief, int? internTarief, int? medewerkerFunctieId, bool isActief)
+        {
+            Id = id;
+            Voornaam = voornaam;
+            TussenVoegsel = tussenVoegsel;
+            Achternaam = achternaam;
+            Email = email;
+            Tarief = tarief;
+            InternTarief = internTarief;
+            MedewerkerFunctieId = medewerkerFunctieId;
+            IsActief = isActief;
+        }
     }
 }

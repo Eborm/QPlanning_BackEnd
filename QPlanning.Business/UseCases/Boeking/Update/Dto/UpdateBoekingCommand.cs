@@ -18,5 +18,20 @@ namespace QPlanning.Business.UseCases.Boeking.Update.Dto
         public int? KlantId { get; set; }
         public int? OpdrachtId { get; set; }
         public int? IndirecteUrenId { get; set; }
+
+        public UpdateBoekingCommand(int? id, int? jaar, int? boekjaar, int? weeknummer, DateTime plannedDate, 
+            int uren, int medewerkerId, int? klantId, int? opdrachtId, int? indirecteUrenId)
+        {
+            Id = id;
+            Jaar = jaar;
+            Boekjaar = boekjaar;
+            Weeknummer = weeknummer;
+            PlannedDate = plannedDate;
+            Uren = uren;
+            MedewerkerId = medewerkerId;
+            KlantId = klantId;
+            OpdrachtId = opdrachtId;
+            IndirecteUrenId = indirecteUrenId;
+        }
     }
 }

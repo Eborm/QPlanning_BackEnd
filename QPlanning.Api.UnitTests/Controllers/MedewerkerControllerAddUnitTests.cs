@@ -12,7 +12,7 @@ using Xunit;
 
 namespace QPlanning.Api.UnitTests.Controllers
 {
-    public class MedewerkerControllerUnitTests
+    public class MedewerkerControllerAddUnitTests
     {
         [Fact]
         public async Task AddMedewerkerCommand_ReturnError_WhenFirstNameShorterThan2Characters()

@@ -32,8 +32,10 @@ using System.Reflection;
 using System.Security.Claims;
 using QPlanning.Business.UseCases.Authentication.Account.Update.Dto.Command;
 using QPlanning.Business.UseCases.Boeking.Add.Dto;
+using QPlanning.Business.UseCases.Boeking.Update.Dto;
 using QPlanning.Business.UseCases.Klanten.Add.Dto.Commands;
 using QPlanning.Business.UseCases.Klanten.Edit.Dto.Commands;
+using QPlanning.Business.UseCases.Medewerkers.Edit.Dto.Command;
 using QPlanning.Business.Validators;
 
 namespace QPlanning.Api
@@ -59,6 +61,8 @@ namespace QPlanning.Api
             services.AddValidatorsFromAssemblyContaining<AddKlantCommand>();
             services.AddValidatorsFromAssemblyContaining<UpdateUserCommand>();
             services.AddValidatorsFromAssemblyContaining<EditKlantCommand>();
+            services.AddValidatorsFromAssemblyContaining<UpdateBoekingCommand>();
+            services.AddValidatorsFromAssemblyContaining<EditMedewerkerCommand>();
 
             //Add framework service
             services.AddDataAccessServices(Configuration);
