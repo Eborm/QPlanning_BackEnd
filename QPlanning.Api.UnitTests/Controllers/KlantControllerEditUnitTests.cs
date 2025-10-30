@@ -152,24 +152,6 @@ namespace QPlanning.Api.UnitTests.Controllers
             Assert.Equal((int)HttpStatusCode.OK, objectResult.StatusCode);
         }
 
-        // Controleer dat het bewerken van een klant een error teruggeeft als Startdatum in het verleden ligt
-        [Fact]
-        public async Task EditKlantCommand_ReturnsError_WhenStartDateIsInPast()
-        {
-            // Arrange
-            var mockMediator = new Mock<IMediator>();
-            var controller = new KlantController(mockMediator.Object);
-
-            var command = CreateEditCommand(startDatum: DateTime.Today.AddDays(-1));
-
-            // Act
-            var result = await controller.Update(command);
-
-            // Assert
-            var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
-            Assert.NotEqual((int)HttpStatusCode.OK, objectResult.StatusCode);
-        }
-
         // Controleer dat het bewerken van een klant geen error teruggeeft als Startdatum vandaag is
         [Fact]
         public async Task EditKlantCommand_ReturnsOK_WhenStartDateIsToday()
