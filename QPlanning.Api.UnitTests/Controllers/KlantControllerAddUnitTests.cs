@@ -250,27 +250,6 @@ namespace QPlanning.Api.UnitTests.Controllers
         }
 
         [Fact]
-        public async Task AddKlantCommand_ReturnsError_WhenStartDateIsInPast()
-        {
-            // Arrange
-            var mockMediator = new Mock<IMediator>();
-            mockMediator
-              .Setup(med => med.Send(It.IsAny<AddKlantCommand>(), It.IsAny<CancellationToken>()))
-              .ReturnsAsync(new BaseResponse("1", true, "OK"));
-
-            var controller = new KlantController(mockMediator.Object);
-
-            var command = CreateAddCommand(startDatum: DateTime.Today.AddDays(-1));
-
-            // Act
-            var result = await controller.Add(command);
-
-            // Assert
-            var objectResult = Assert.IsAssignableFrom<ObjectResult>(result);
-            Assert.NotEqual((int)HttpStatusCode.OK, objectResult.StatusCode);
-        }
-
-        [Fact]
         public async Task AddKlantCommand_ReturnsError_WhenEnddateBeforeStartDate()
         {
             // Arrange

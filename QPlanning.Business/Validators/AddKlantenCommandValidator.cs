@@ -30,11 +30,9 @@ public class AddKlantCommandValidator : AbstractValidator<AddKlantCommand>
             .NotNull().WithMessage("Name cannot be null.")
             .MinimumLength(2).WithMessage("Name cannot be shorter than 2 characters.")
             .MaximumLength(100).WithMessage("Name cannot be longer than 100 characters.");
-        
+
         RuleFor(x => x.Startdatum)
-            .NotNull().WithMessage("Startdatum cannot be null.")
-            .GreaterThanOrEqualTo(DateTime.Today)
-            .WithMessage("StartDatum cannot be in the past.");
+            .NotNull().WithMessage("Startdatum cannot be null.");
         
         RuleFor(x => x.Einddatum)
             .NotNull().WithMessage("Einddatum cannot be null.")
